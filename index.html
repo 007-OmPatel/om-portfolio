@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net/npm/chart.js; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://generativelanguage.googleapis.com; img-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net/npm/chart.js; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' *.netlify.app; img-src 'self' data:;">
     <title>Om Patel | Cybersecurity & Machine Learning Specialist</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,37 +22,24 @@
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-        @keyframes background-pan {
-            from { background-position: 0% 0%; }
-            to { background-position: 0% -200%; }
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #020617; /* slate-950 */
-            color: #cbd5e1; /* slate-300 */
-            overflow-x: hidden;
-        }
-        #background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-image: linear-gradient(rgba(2, 6, 23, 0.95), rgba(2, 6, 23, 0.95)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><defs><filter id="f1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter></defs><circle cx="20" cy="20" r="2" fill="%2306b6d4" filter="url(%23f1)"/><circle cx="80" cy="30" r="1.5" fill="%230e7490"/><circle cx="30" cy="70" r="1" fill="%2322d3ee"/><circle cx="90" cy="80" r="2.5" fill="%2306b6d4" filter="url(%23f1)"/></svg>');
-            background-size: 200px 200px;
-            animation: background-pan 30s linear infinite;
-            opacity: 0.3;
-        }
+        @keyframes background-pan { from { background-position: 0% 0%; } to { background-position: 0% -200%; } }
+        @keyframes glitch { 2%, 64% { transform: translate(2px, 0) skew(0deg); } 4%, 60% { transform: translate(-2px, 0) skew(0deg); } 62% { transform: translate(0, 0) skew(5deg); } }
+        @keyframes scan-line { 0% { top: 0; opacity: 0; } 10% { opacity: 0.7; } 90% { opacity: 0.7; } 100% { top: 100%; opacity: 0; } }
+        @keyframes typing { from { width: 0; } to { width: 100%; } }
+        @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #22d3ee; } }
+
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: #cbd5e1; overflow-x: hidden; }
+        #background-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-image: linear-gradient(rgba(2, 6, 23, 0.95), rgba(2, 6, 23, 0.95)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><defs><filter id="f1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter></defs><circle cx="20" cy="20" r="2" fill="%2306b6d4" filter="url(%23f1)"/><circle cx="80" cy="30" r="1.5" fill="%230e7490"/><circle cx="30" cy="70" r="1" fill="%2322d3ee"/><circle cx="90" cy="80" r="2.5" fill="%2306b6d4" filter="url(%23f1)"/></svg>'); background-size: 200px 200px; animation: background-pan 30s linear infinite; opacity: 0.3; }
         .font-mono { font-family: 'Roboto Mono', monospace; }
-        .chart-container { position: relative; width: 100%; max-width: 500px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        .chart-container { position: relative; width: 100%; max-width: 500px; margin: auto; height: 350px; max-height: 400px; }
         @media (min-width: 768px) { .chart-container { height: 400px; } }
         .project-card-details { max-height: 0; overflow: hidden; transition: max-height 0.7s ease-in-out; }
         .project-card.open .project-card-details { max-height: 500px; }
         .timeline-item::before { content: ''; position: absolute; left: -2.75rem; top: 0.25rem; width: 1.5rem; height: 1.5rem; background-color: #1e293b; border: 4px solid #22d3ee; border-radius: 50%; z-index: 1; }
         .modal { transition: opacity 0.25s ease; }
-        @keyframes glitch { 2%, 64% { transform: translate(2px, 0) skew(0deg); } 4%, 60% { transform: translate(-2px, 0) skew(0deg); } 62% { transform: translate(0, 0) skew(5deg); } }
         .glitch-text:hover { animation: glitch 1s linear infinite; }
+        .project-card:hover::after { content: ''; position: absolute; left: 0; width: 100%; height: 3px; background: rgba(34, 211, 238, 0.7); box-shadow: 0 0 10px rgba(34, 211, 238, 1); animation: scan-line 2s cubic-bezier(0.23, 1, 0.32, 1) infinite; }
+        #hero-title { overflow: hidden; border-right: .15em solid #22d3ee; white-space: nowrap; margin: 0 auto; letter-spacing: .1em; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
     </style>
 </head>
 <body class="antialiased">
@@ -97,7 +84,7 @@
 
         <!-- Hero Section -->
         <section id="hero" class="text-center mb-20">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight">Cybersecurity & Machine Learning Specialist</h1>
+            <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight">Cybersecurity & Machine Learning Specialist</h1>
             <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto">
                 Building, fortifying, and defending modern digital ecosystems with AI-driven threat detection and secure software engineering.
             </p>
@@ -138,7 +125,7 @@
             <p class="text-center text-slate-400 mb-12 max-w-2xl mx-auto">A selection of projects demonstrating my ability to apply theoretical knowledge to solve real-world problems. Click on any project to see more details about the implementation and its impact.</p>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm" onclick="toggleProject(this)">
+                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm relative" onclick="toggleProject(this)">
                     <div class="p-6 flex-grow">
                         <h3 class="text-xl font-bold text-white mb-2">Hybrid AI Phishing Detection Model</h3>
                         <p class="text-slate-400 mb-4 font-mono text-sm">MSc Thesis Project</p>
@@ -150,7 +137,7 @@
                     <div class="p-6 pt-0"><span class="text-cyan-400 font-semibold mt-4 inline-block">Click to learn more...</span></div>
                 </div>
 
-                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm" onclick="toggleProject(this)">
+                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm relative" onclick="toggleProject(this)">
                     <div class="p-6 flex-grow">
                         <h3 class="text-xl font-bold text-white mb-2">AI-Driven Security Threat Detection</h3>
                         <p class="text-slate-400 mb-4 font-mono text-sm">Academic Project</p>
@@ -162,7 +149,7 @@
                     <div class="p-6 pt-0"><span class="text-cyan-400 font-semibold mt-4 inline-block">Click to learn more...</span></div>
                 </div>
 
-                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm" onclick="toggleProject(this)">
+                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm relative" onclick="toggleProject(this)">
                     <div class="p-6 flex-grow">
                         <h3 class="text-xl font-bold text-white mb-2">Human Resource Management System</h3>
                         <p class="text-slate-400 mb-4 font-mono text-sm">Full-Stack Application</p>
@@ -174,7 +161,7 @@
                     <div class="p-6 pt-0"><span class="text-cyan-400 font-semibold mt-4 inline-block">Click to learn more...</span></div>
                 </div>
 
-                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm" onclick="toggleProject(this)">
+                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm relative" onclick="toggleProject(this)">
                     <div class="p-6 flex-grow">
                         <h3 class="text-xl font-bold text-white mb-2">Predicting Driver Situation Awareness</h3>
                         <p class="text-slate-400 mb-4 font-mono text-sm">ML Research Project</p>
@@ -186,7 +173,7 @@
                     <div class="p-6 pt-0"><span class="text-cyan-400 font-semibold mt-4 inline-block">Click to learn more...</span></div>
                 </div>
                 
-                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm" onclick="toggleProject(this)">
+                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm relative" onclick="toggleProject(this)">
                     <div class="p-6 flex-grow">
                         <h3 class="text-xl font-bold text-white mb-2">Prolog-Based Text Adventure Game</h3>
                         <p class="text-slate-400 mb-4 font-mono text-sm">AI & Logic Programming</p>
@@ -198,7 +185,7 @@
                     <div class="p-6 pt-0"><span class="text-cyan-400 font-semibold mt-4 inline-block">Click to learn more...</span></div>
                 </div>
 
-                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm" onclick="toggleProject(this)">
+                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm relative" onclick="toggleProject(this)">
                     <div class="p-6 flex-grow">
                         <h3 class="text-xl font-bold text-white mb-2">Deepfake Threat Research</h3>
                         <p class="text-slate-400 mb-4 font-mono text-sm">Independent Research</p>
@@ -266,19 +253,28 @@
         const cvContext = `Om Patel - Cybersecurity & Machine Learning Specialist. Summary: Results-oriented specialist with a record of developing high-accuracy, AI-driven threat detection systems. Combines ethical hacking, penetration testing, and secure full-stack development. Education: MSc in Cybersecurity and Machine Learning, University of Aberdeen (Expected 2025); BSc in Information and Technology (First Class with Distinction). Certifications: Cybersecurity Levels 1, 2 & 3 from Intellect Computer Institute. Core Skills: Cybersecurity (Ethical Hacking, Penetration Testing, Metasploit, Nmap, Network Security, Threat Analysis, Incident Response, Digital Forensics, Wireshark, Autopsy), Machine Learning for Security (Phishing Detection, Threat Classification, Anomaly Detection, NLP, Deepfake Detection, BERT, LSTM, LightGBM, XGBoost), Secure Software Development (Full-Stack, ASP.NET, Angular, Secure API Design, Database Security). Key Projects: 1. Hybrid AI Phishing Detection Model: MSc Thesis, 98.7% accuracy. 2. AI-Driven Security Threat Detection: Reduced false positives by ~30%. 3. Deepfake Threat Research: Authored report with mitigation strategies. 4. Human Resource Management System: Full-stack HR platform. 5. Predicting Driver Situation Awareness: ML for safe human-AI interaction. 6. Prolog-Based Text Adventure Game: AI knowledge representation. Professional Experience: Freelance Web Developer & Project Lead, Full Stack Developer Intern, Cybersecurity Tutor for senior law enforcement.`;
 
         async function callGemini(prompt) {
-            const apiKey = "";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+            // This function now calls our secure Netlify function
+            const apiUrl = `/.netlify/functions/gemini`;
             try {
-                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                if (!response.ok) throw new Error(`API call failed with status: ${response.status}`);
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API call to proxy failed with status: ${response.status}`);
+                }
+
                 const result = await response.json();
                 if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
                     return result.candidates[0].content.parts[0].text;
+                } else if (result.error) {
+                    throw new Error(result.error);
                 }
                 return "Sorry, I couldn't generate a response. The model may be unavailable.";
             } catch (error) {
-                console.error("Gemini API call error:", error);
+                console.error("Gemini proxy call error:", error);
                 return "An error occurred while trying to contact the AI assistant. Please check the console for details.";
             }
         }
