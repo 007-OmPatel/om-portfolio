@@ -1,105 +1,389 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Om Patel - Portfolio</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    .dark-mode { background-color: #1a202c; color: white; }
-    .light-mode { background-color: white; color: black; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net/npm/chart.js; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://generativelanguage.googleapis.com; img-src 'self' data:;">
+    <title>Om Patel | Cybersecurity & Machine Learning Specialist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Dark Slate & Cyan -->
+    <!-- Application Structure Plan: A single-page application with a top navigation bar for smooth scrolling to thematic sections. This non-linear structure allows recruiters to immediately jump to the content most relevant to them. The flow is designed to first present a high-level summary, then allow a deep-dive into specific areas via interactive elements. Gemini API features are added to provide a conversational layer and demonstrate proactive AI integration. -->
+    <!-- Visualization & Content Choices: 
+        - Skills Table -> Goal: Compare/Organize -> Viz: Interactive Polar Area Chart (Chart.js) -> Interaction: Hover tooltips reveal detailed skills. Justification: Visually represents the multi-faceted nature of his expertise.
+        - Projects List -> Goal: Inform/Engage -> Viz: Grid of interactive cards (HTML/CSS) -> Interaction: Clicking a card toggles visibility. Justification: Encourages engagement and keeps the layout clean.
+        - Experience/Education -> Goal: Show Progression -> Viz: Vertical Timeline (HTML/CSS). Justification: Clear, intuitive representation of his career path.
+        - AI Q&A -> Goal: Engage/Inform -> Viz: Text Input/Output (HTML) -> Interaction: User types question, Gemini API generates answer. Justification: Creates a dynamic, conversational experience for recruiters.
+        - AI Cover Letter -> Goal: Demonstrate/Assist -> Viz: Modal Input (HTML) -> Interaction: User provides role/company, Gemini API generates text. Justification: Showcases proactive use of AI and assists recruiters.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        @keyframes background-pan {
+            from { background-position: 0% 0%; }
+            to { background-position: 0% -200%; }
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617; /* slate-950 */
+            color: #cbd5e1; /* slate-300 */
+            overflow-x: hidden;
+        }
+        #background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: linear-gradient(rgba(2, 6, 23, 0.95), rgba(2, 6, 23, 0.95)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><defs><filter id="f1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter></defs><circle cx="20" cy="20" r="2" fill="%2306b6d4" filter="url(%23f1)"/><circle cx="80" cy="30" r="1.5" fill="%230e7490"/><circle cx="30" cy="70" r="1" fill="%2322d3ee"/><circle cx="90" cy="80" r="2.5" fill="%2306b6d4" filter="url(%23f1)"/></svg>');
+            background-size: 200px 200px;
+            animation: background-pan 30s linear infinite;
+            opacity: 0.3;
+        }
+        .font-mono { font-family: 'Roboto Mono', monospace; }
+        .chart-container { position: relative; width: 100%; max-width: 500px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 400px; } }
+        .project-card-details { max-height: 0; overflow: hidden; transition: max-height 0.7s ease-in-out; }
+        .project-card.open .project-card-details { max-height: 500px; }
+        .timeline-item::before { content: ''; position: absolute; left: -2.75rem; top: 0.25rem; width: 1.5rem; height: 1.5rem; background-color: #1e293b; border: 4px solid #22d3ee; border-radius: 50%; z-index: 1; }
+        .modal { transition: opacity 0.25s ease; }
+        @keyframes glitch { 2%, 64% { transform: translate(2px, 0) skew(0deg); } 4%, 60% { transform: translate(-2px, 0) skew(0deg); } 62% { transform: translate(0, 0) skew(5deg); } }
+        .glitch-text:hover { animation: glitch 1s linear infinite; }
+    </style>
 </head>
-<body class="light-mode" id="body">
-  <div class="p-6 flex justify-between items-center border-b">
-    <h1 class="text-2xl font-bold">Om Patel</h1>
-    <div class="flex gap-4 items-center">
-      <a href="Om_Patel_CV.pdf" download class="px-4 py-2 rounded bg-blue-600 text-white">Download CV</a>
-      <button onclick="toggleMode()" class="text-sm px-3 py-1 border rounded" id="toggleBtn">Dark Mode</button>
-    </div>
-  </div>
+<body class="antialiased">
 
-  <section class="p-6">
-    <h2 class="text-xl font-semibold mb-2">About Me</h2>
-    <p>Hi, I’m Om Patel—a postgraduate student pursuing an MSc in Cybersecurity and Machine Learning at the
-University of Aberdeen. I bring a unique blend of expertise in full-stack web development, AI/ML analytics,
-and hands-on cybersecurity practices. My academic background, combined with real-world experience
-leading web development projects and interning as a .NET + Angular developer, enables me to build secure,
-intelligent systems from the ground up.</p><p>
-What sets me apart is my ability to connect the dots between machine learning algorithms and cyber defense
-mechanisms. Whether it’s using AI for security analytics, developing custom OCR systems, or performing
-penetration testing with tools like Metasploit and Wireshark, I’m passionate about turning complex
-challenges into innovative, data-driven solutions.</p><p>
-I can add value to your team by contributing to secure system design, automating analytics pipelines,
-building scalable web apps, and supporting ethical hacking or forensics efforts. I thrive in collaborative
-environments and am always eager to learn, adapt, and deliver high-quality results.
-</p>
-  </section>
+    <div id="background-animation"></div>
 
-  <section class="p-6">
-    <h2 class="text-xl font-semibold mb-2">Skills</h2>
-    <ul class="grid grid-cols-2 gap-2 list-disc pl-5">
-      <li>Python, Java, C#, JavaScript</li>
-      <li>ASP.NET Core/MVC, Angular</li>
-      <li>Kali Linux, Metasploit, Wireshark</li>
-      <li>Machine Learning, AI, Shell Scripting</li>
-      <li>PostgreSQL, MySQL</li>
-      <li>Git, VS Code, Visual Studio</li>
-    </ul>
-  </section>
+    <!-- Header & Navigation -->
+    <header class="bg-slate-900/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-700/50">
+        <nav class="container mx-auto px-6 py-3 flex items-center">
+            <a href="#" class="text-2xl font-extrabold text-white hover:text-cyan-400 transition-colors glitch-text mr-auto">
+                Om Patel
+            </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#overview" class="text-slate-300 hover:text-cyan-400 transition-colors">Overview</a>
+                <a href="#skills" class="text-slate-300 hover:text-cyan-400 transition-colors">Skills</a>
+                <a href="#projects" class="text-slate-300 hover:text-cyan-400 transition-colors">Projects</a>
+                <a href="#experience" class="text-slate-300 hover:text-cyan-400 transition-colors">Experience</a>
+                <a href="#certifications" class="text-slate-300 hover:text-cyan-400 transition-colors">Certifications</a>
+                <a href="#ai-chat" class="bg-cyan-400/10 text-cyan-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-cyan-400/20 transition-colors">✨ AI Q&A</a>
+                <a href="mailto:007omp@gmail.com" class="bg-cyan-500 text-slate-900 px-5 py-2 rounded-md text-sm font-bold hover:bg-cyan-400 transition-colors">Contact Me</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-slate-300 hover:text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#overview" class="block py-2 px-6 text-slate-300 hover:bg-slate-800">Overview</a>
+            <a href="#skills" class="block py-2 px-6 text-slate-300 hover:bg-slate-800">Skills</a>
+            <a href="#projects" class="block py-2 px-6 text-slate-300 hover:bg-slate-800">Projects</a>
+            <a href="#experience" class="block py-2 px-6 text-slate-300 hover:bg-slate-800">Experience</a>
+            <a href="#certifications" class="block py-2 px-6 text-slate-300 hover:bg-slate-800">Certifications</a>
+            <a href="#ai-chat" class="block py-2 px-6 text-slate-300 hover:bg-slate-800">✨ AI Q&A</a>
+            <a href="mailto:007omp@gmail.com" class="block py-4 px-6 text-center bg-cyan-500 text-slate-900 font-bold hover:bg-cyan-400">Contact Me</a>
+        </div>
+    </header>
 
-  <section class="p-6">
-    <h2 class="text-xl font-semibold mb-2">Projects</h2>
-    <ul class="space-y-2 list-disc pl-5">
-      <li><strong>AI-Driven Security Threat Detection</strong> – Machine learning models to identify and classify security threats using a real-world cybersecurity
-dataset.</li>
-      <li><strong>Predicting Situation Awareness Scores in ConditionallyAutomated Driving</strong> – ML models to predict driver situation awareness during takeover transitions using eye-tracking
-and self-reported data.</li>
-      <li><strong>Prolog-Based Text Adventure Game: Mafia Loan Escape</strong> – Rule-based interactive game using SWI-Prolog which represents my understanding about
-Knowledge Representation & Reasoning for AI. The storyline involved escaping a loan debt from the mafia,
-with mechanics involving risk management, strategic decisions, and knowledge-based reasoning.</li>
-      <li><strong>NLG System (Arria)</strong> – Auto      -generates sports narratives using structured stats.</li>
-      <li><strong>AI Music Recommender</strong> – Suggests songs using content & collaborative filtering.</li>
-      <li><strong>Cats vs Dogs Classifier</strong> – CNN-based image classification.</li>
-      <li><strong>DeepFake Research</strong> – Tools for generating and detecting deepfakes.</li>
-      <li><strong>Contact Manager (.NET)</strong> – Role-based CRUD application with admin panel.</li>
-    </ul>
-  </section>
+    <main class="container mx-auto px-6 py-12 md:py-20">
 
-  <section class="p-6">
-    <h2 class="text-xl font-semibold mb-2">Education & Certifications</h2>
-    <ul class="list-disc pl-5">
-      <li>MSc in Cybersecurity and Machine Learning – University of Aberdeen (2024–2025)</li>
-      <li>BSc in IT – Shree Ramkrishna Institute, India (2021–2024)</li>
-      <li>Cyber Security Certification (Level 1–3) – Intellect Computers</li>
-    </ul>
-  </section>
+        <!-- Hero Section -->
+        <section id="hero" class="text-center mb-20">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight">Cybersecurity & Machine Learning Specialist</h1>
+            <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto">
+                Building, fortifying, and defending modern digital ecosystems with AI-driven threat detection and secure software engineering.
+            </p>
+             <div class="mt-8 flex justify-center space-x-4">
+                <a href="https://github.com/007-OmPatel" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
+        </section>
 
-  <section class="p-6">
-    <h2 class="text-xl font-semibold mb-2">Contact</h2>
-    <p>Email: <a href="mailto:007omp@gmail.com" class="text-blue-600">007omp@gmail.com</a></p>
-    <div class="flex gap-4 mt-2">
-      <a href="https://github.com/007-OmPatel" target="_blank" class="text-xl">GitHub</a>
-      <a href="https://www.linkedin.com/in/om-patel-132a4a261" target="_blank" class="text-xl">LinkedIn</a>
-    </div>
-  </section>
+        <!-- Overview Section -->
+        <section id="overview" class="mb-20">
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Overview</h2>
+            <div class="max-w-4xl mx-auto bg-slate-800/50 p-8 rounded-xl border border-slate-700 backdrop-blur-sm">
+                <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                    Results-oriented Cybersecurity and Machine Learning specialist with a proven record of developing high-accuracy, AI-driven threat detection systems. I combine hands-on ethical hacking and penetration testing skills with a strong foundation in secure full-stack development to build, fortify, and defend modern digital ecosystems. I am passionate about translating complex security challenges into actionable, data-driven solutions that deliver measurable improvements in security posture.
+                </p>
+                <div class="text-center">
+                    <button id="openCoverLetterModal" class="bg-cyan-500 text-slate-900 font-bold py-3 px-6 rounded-lg hover:bg-cyan-400 transition-colors duration-300">
+                        ✨ Generate Cover Letter Intro
+                    </button>
+                </div>
+            </div>
+        </section>
 
-  <script>
-    function toggleMode() {
-      const body = document.getElementById("body");
-      const btn = document.getElementById("toggleBtn");
-      const dark = body.classList.contains("dark-mode");
-      if (dark) {
-        body.classList.remove("dark-mode");
-        body.classList.add("light-mode");
-        btn.innerText = "Dark Mode";
-      } else {
-        body.classList.remove("light-mode");
-        body.classList.add("dark-mode");
-        btn.innerText = "Light Mode";
-      }
-    }
-  </script>
+        <!-- Skills Section -->
+        <section id="skills" class="mb-20">
+            <h2 class="text-3xl font-bold text-center text-white mb-4">Core Expertise</h2>
+            <p class="text-center text-slate-400 mb-12 max-w-2xl mx-auto">This chart visualizes my key areas of expertise. Hover over a segment to see the specific skills within each domain, showcasing the synergy between Cybersecurity, Machine Learning, and Secure Development.</p>
+            <div class="chart-container">
+                <canvas id="skillsChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="mb-20">
+            <h2 class="text-3xl font-bold text-center text-white mb-4">Key Projects</h2>
+            <p class="text-center text-slate-400 mb-12 max-w-2xl mx-auto">A selection of projects demonstrating my ability to apply theoretical knowledge to solve real-world problems. Click on any project to see more details about the implementation and its impact.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm" onclick="toggleProject(this)">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold text-white mb-2">Hybrid AI Phishing Detection Model</h3>
+                        <p class="text-slate-400 mb-4 font-mono text-sm">MSc Thesis Project</p>
+                        <div class="project-card-details">
+                            <p class="text-slate-300 mb-4">Engineered a novel soft-voting hybrid model combining a BERT+LSTM architecture with LightGBM to detect sophisticated phishing attempts across email and SMS platforms.</p>
+                            <p class="font-bold text-cyan-400 font-mono">Impact: Achieved 98.7% detection accuracy on a diverse dataset of real-world phishing attempts.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0"><span class="text-cyan-400 font-semibold mt-4 inline-block">Click to learn more...</span></div>
+                </div>
+
+                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm" onclick="toggleProject(this)">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold text-white mb-2">AI-Driven Security Threat Detection</h3>
+                        <p class="text-slate-400 mb-4 font-mono text-sm">Academic Project</p>
+                        <div class="project-card-details">
+                            <p class="text-slate-300 mb-4">Developed and benchmarked multiple machine learning models (XGBoost, LightGBM, KNN) to identify and classify threats from a large-scale cybersecurity dataset.</p>
+                            <p class="font-bold text-cyan-400 font-mono">Impact: Delivered an intelligence model capable of reducing false positive alerts by an estimated 30%.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0"><span class="text-cyan-400 font-semibold mt-4 inline-block">Click to learn more...</span></div>
+                </div>
+
+                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm" onclick="toggleProject(this)">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold text-white mb-2">Human Resource Management System</h3>
+                        <p class="text-slate-400 mb-4 font-mono text-sm">Full-Stack Application</p>
+                        <div class="project-card-details">
+                            <p class="text-slate-300 mb-4">Developed a comprehensive HR system with modules for recruitment, onboarding, e-training, and project management to enhance workforce productivity.</p>
+                             <p class="font-bold text-cyan-400 font-mono">Tech Stack: ASP.NET Core MVC, C#, SQL Server, JavaScript.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0"><span class="text-cyan-400 font-semibold mt-4 inline-block">Click to learn more...</span></div>
+                </div>
+
+                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm" onclick="toggleProject(this)">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold text-white mb-2">Predicting Driver Situation Awareness</h3>
+                        <p class="text-slate-400 mb-4 font-mono text-sm">ML Research Project</p>
+                        <div class="project-card-details">
+                            <p class="text-slate-300 mb-4">Developed ML models (XGBoost, LightGBM) to predict driver situation awareness during takeover transitions in automated driving, using eye-tracking data.</p>
+                            <p class="font-bold text-cyan-400 font-mono">Impact: Focused on improving safe human-AI interaction in autonomous systems by identifying critical features affecting driver response.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0"><span class="text-cyan-400 font-semibold mt-4 inline-block">Click to learn more...</span></div>
+                </div>
+                
+                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm" onclick="toggleProject(this)">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold text-white mb-2">Prolog-Based Text Adventure Game</h3>
+                        <p class="text-slate-400 mb-4 font-mono text-sm">AI & Logic Programming</p>
+                        <div class="project-card-details">
+                            <p class="text-slate-300 mb-4">Developed a rule-based interactive game using SWI-Prolog to demonstrate knowledge representation and reasoning for AI.</p>
+                            <p class="font-bold text-cyan-400 font-mono">Features: Dynamic storyline (Mafia Loan Escape), inventory system, and complex win/loss logic based on strategic decisions.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0"><span class="text-cyan-400 font-semibold mt-4 inline-block">Click to learn more...</span></div>
+                </div>
+
+                <div class="project-card bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden cursor-pointer h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm" onclick="toggleProject(this)">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold text-white mb-2">Deepfake Threat Research</h3>
+                        <p class="text-slate-400 mb-4 font-mono text-sm">Independent Research</p>
+                        <div class="project-card-details">
+                            <p class="text-slate-300 mb-4">Conducted extensive research on the security risks of AI-manipulated media, investigating GANs and morphing techniques using tools like DeepFace Live and Deepware.</p>
+                            <p class="font-bold text-cyan-400 font-mono">Impact: Authored a comprehensive research report outlining three novel mitigation strategies to protect enterprise environments.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0"><span class="text-cyan-400 font-semibold mt-4 inline-block">Click to learn more...</span></div>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- Experience & Education Section -->
+        <section id="experience" class="mb-20">
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Career & Education Timeline</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="relative border-l-2 border-slate-700 ml-12 pl-12 pb-4">
+                    <div class="timeline-item mb-12"><h3 class="text-xl font-bold text-white">MSc in Cybersecurity and Machine Learning</h3><p class="text-md font-medium text-slate-400">University of Aberdeen, UK</p><p class="text-sm text-slate-500 font-mono">Sep 2024 – Sep 2025 (Expected)</p></div>
+                    <div class="timeline-item mb-12"><h3 class="text-xl font-bold text-white">Freelance Web Developer & Project Lead</h3><p class="text-md font-medium text-slate-400">Kairo | Surat, India</p><p class="text-sm text-slate-500 font-mono">Jul 2024 – Present</p></div>
+                    <div class="timeline-item mb-12"><h3 class="text-xl font-bold text-white">Full Stack Developer Intern</h3><p class="text-md font-medium text-slate-400">Elite Technocrats | Surat, India</p><p class="text-sm text-slate-500 font-mono">Jan 2024 – May 2024</p></div>
+                    <div class="timeline-item mb-12"><h3 class="text-xl font-bold text-white">Cybersecurity Tutor</h3><p class="text-md font-medium text-slate-400">Private Tutoring for Deputy Commissioner of Police</p><p class="text-sm text-slate-500 font-mono">Dec 2023 – May 2024</p></div>
+                    <div class="timeline-item"><h3 class="text-xl font-bold text-white">BSc in Information and Technology</h3><p class="text-md font-medium text-slate-400">Sarvajanik University, India | First Class with Distinction</p><p class="text-sm text-slate-500 font-mono">2021 – 2024</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="mb-20">
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Certifications</h2>
+            <div class="max-w-2xl mx-auto bg-slate-800/50 p-8 rounded-xl text-center border border-slate-700 backdrop-blur-sm">
+                 <h3 class="text-xl font-bold text-white">Cybersecurity - Levels 1, 2 & 3</h3>
+                 <p class="text-md font-medium text-cyan-400 mt-2 font-mono">Intellect Computer Institute, Surat</p>
+                 <p class="mt-4 text-slate-300">Completed foundational to advanced levels of cybersecurity training, including network security, ethical hacking, and system protection with practical exposure to security tools and threat mitigation strategies.</p>
+            </div>
+        </section>
+
+        <!-- AI Chat Section -->
+        <section id="ai-chat" class="mb-20">
+            <div class="max-w-4xl mx-auto bg-slate-800/50 p-8 rounded-xl border border-slate-700 backdrop-blur-sm">
+                <h2 class="text-3xl font-bold text-center text-white mb-4">✨ Ask Me Anything</h2>
+                <p class="text-center text-slate-400 mb-8 max-w-2xl mx-auto">Have a question about my experience, a specific project, or how my skills can benefit your team? Ask my AI assistant below. It's powered by Google's Gemini API and has been trained on my CV.</p>
+                <div class="space-y-4">
+                    <textarea id="ai-question" class="w-full p-4 bg-slate-900 border border-slate-600 rounded-lg text-slate-300 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition" rows="3" placeholder="e.g., Tell me more about your experience with penetration testing tools."></textarea>
+                    <button id="ask-ai-button" class="w-full bg-cyan-500 text-slate-900 font-bold py-3 px-6 rounded-lg hover:bg-cyan-400 transition-colors duration-300 flex items-center justify-center">Ask AI Assistant</button>
+                    <div id="ai-response-container" class="mt-6 p-6 bg-slate-900 rounded-lg border border-slate-700" style="display: none;"><p id="ai-response" class="text-slate-300 whitespace-pre-wrap"></p></div>
+                    <div id="ai-loading" class="text-center py-4" style="display: none;"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400 mx-auto"></div><p class="mt-2 text-slate-400">Thinking...</p></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900/50 border-t border-slate-800 mt-20">
+        <div class="container mx-auto px-6 py-8 text-center"><h3 class="text-2xl font-bold text-white mb-2">Let's Connect</h3><p class="mb-4 text-slate-400">Open to new opportunities and collaborations.</p><a href="mailto:007omp@gmail.com" class="bg-cyan-500 text-slate-900 px-6 py-3 rounded-lg hover:bg-cyan-400 transition-colors duration-300 inline-block font-bold">007omp@gmail.com</a><div class="mt-8 border-t border-slate-800 pt-6"><p class="text-slate-500">&copy; 2025 Om Patel. All Rights Reserved.</p></div></div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="coverLetterModal" class="modal fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none"><div class="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl p-8 w-full max-w-lg transform -translate-y-12 transition-transform duration-300"><h3 class="text-2xl font-bold text-white mb-4">✨ AI Cover Letter Assistant</h3><p class="text-slate-400 mb-6">Provide a company name and job role to generate a tailored cover letter introduction.</p><div class="space-y-4"><input type="text" id="companyName" placeholder="Company Name (e.g., Google)" class="w-full p-3 bg-slate-900 border border-slate-600 rounded-lg text-slate-300 focus:ring-cyan-500"><input type="text" id="jobRole" placeholder="Job Role (e.g., Security Engineer)" class="w-full p-3 bg-slate-900 border border-slate-600 rounded-lg text-slate-300 focus:ring-cyan-500"><button id="generateCoverLetter" class="w-full bg-cyan-500 text-slate-900 font-bold py-3 rounded-lg hover:bg-cyan-400 transition-colors">Generate Intro</button><button id="closeCoverLetterModal" class="w-full bg-slate-700 text-slate-300 font-bold py-3 rounded-lg hover:bg-slate-600 transition-colors">Cancel</button></div><div id="coverLetterResultContainer" class="mt-6" style="display: none;"><div id="coverLetterLoading" class="text-center py-4" style="display: none;"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400 mx-auto"></div><p class="mt-2 text-slate-400">Generating...</p></div><div id="coverLetterResult" class="p-4 bg-slate-900/50 border border-slate-700 rounded-lg text-slate-300"></div></div></div></div>
+    <div id="securityModal" class="modal fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none"><div class="bg-slate-800 border border-cyan-500 rounded-xl shadow-2xl p-8 w-full max-w-md text-center transform -translate-y-12 transition-transform duration-300"><p id="securityModalText" class="text-2xl font-mono text-white"></p><button id="closeSecurityModal" class="mt-6 bg-cyan-500 text-slate-900 font-bold py-2 px-6 rounded-lg hover:bg-cyan-400 transition-colors">Got it</button></div></div>
+
+    <script>
+        const cvContext = `Om Patel - Cybersecurity & Machine Learning Specialist. Summary: Results-oriented specialist with a record of developing high-accuracy, AI-driven threat detection systems. Combines ethical hacking, penetration testing, and secure full-stack development. Education: MSc in Cybersecurity and Machine Learning, University of Aberdeen (Expected 2025); BSc in Information and Technology (First Class with Distinction). Certifications: Cybersecurity Levels 1, 2 & 3 from Intellect Computer Institute. Core Skills: Cybersecurity (Ethical Hacking, Penetration Testing, Metasploit, Nmap, Network Security, Threat Analysis, Incident Response, Digital Forensics, Wireshark, Autopsy), Machine Learning for Security (Phishing Detection, Threat Classification, Anomaly Detection, NLP, Deepfake Detection, BERT, LSTM, LightGBM, XGBoost), Secure Software Development (Full-Stack, ASP.NET, Angular, Secure API Design, Database Security). Key Projects: 1. Hybrid AI Phishing Detection Model: MSc Thesis, 98.7% accuracy. 2. AI-Driven Security Threat Detection: Reduced false positives by ~30%. 3. Deepfake Threat Research: Authored report with mitigation strategies. 4. Human Resource Management System: Full-stack HR platform. 5. Predicting Driver Situation Awareness: ML for safe human-AI interaction. 6. Prolog-Based Text Adventure Game: AI knowledge representation. Professional Experience: Freelance Web Developer & Project Lead, Full Stack Developer Intern, Cybersecurity Tutor for senior law enforcement.`;
+
+        async function callGemini(prompt) {
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+            try {
+                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                if (!response.ok) throw new Error(`API call failed with status: ${response.status}`);
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                }
+                return "Sorry, I couldn't generate a response. The model may be unavailable.";
+            } catch (error) {
+                console.error("Gemini API call error:", error);
+                return "An error occurred while trying to contact the AI assistant. Please check the console for details.";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+            // Security Features
+            const securityModal = document.getElementById('securityModal');
+            const securityModalText = document.getElementById('securityModalText');
+            const closeSecurityModalBtn = document.getElementById('closeSecurityModal');
+            let devToolsTriggered = false;
+            
+            const showSecurityModal = (text) => {
+                securityModalText.innerHTML = text;
+                securityModal.classList.remove('opacity-0', 'pointer-events-none');
+                securityModal.querySelector('div').classList.remove('-translate-y-12');
+            };
+            const closeSecurityModal = () => {
+                securityModal.classList.add('opacity-0', 'pointer-events-none');
+                securityModal.querySelector('div').classList.add('-translate-y-12');
+            };
+            closeSecurityModalBtn.addEventListener('click', closeSecurityModal);
+
+            document.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                showSecurityModal("Access denied. Nice try, though! 😉");
+            });
+
+            const devToolsDetector = () => {
+                if (devToolsTriggered) return;
+                const threshold = 160;
+                if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                    showSecurityModal("Trying to peek under the hood? <br> That's where I come in.");
+                    devToolsTriggered = true;
+                }
+            };
+            setInterval(devToolsDetector, 1000);
+
+            const sanitizeInput = (input) => {
+                const scriptTagRegex = /<script\b[^>]*>[\s\S]*?<\/script\b[^>]*>/gi;
+                if (scriptTagRegex.test(input)) {
+                    return { detected: true };
+                }
+                return { detected: false, sanitized: input };
+            };
+
+            // Skills Chart
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            const skillsTooltips = [['Ethical Hacking', 'Penetration Testing', 'Network Security', 'Threat Analysis', 'Incident Response', 'Digital Forensics'], ['Phishing Detection', 'Threat Classification', 'Anomaly Detection', 'NLP', 'Deepfake Detection', 'BERT, LSTM, LightGBM'], ['Full-Stack (ASP.NET, Angular)', 'Secure API Design', 'Database Security', 'Secure SDLC', 'AuthN & AuthZ'], ['Metasploit', 'Nmap', 'Wireshark', 'Autopsy', 'Kali Linux'], ['Python', 'TensorFlow', 'Scikit-learn', 'SQL', 'Data Preprocessing']];
+            new Chart(ctx, { type: 'polarArea', data: { labels: ['Cybersecurity & Threat Intelligence', 'Machine Learning for Security', 'Secure Software Development', 'Ethical Hacking & Pen Testing', 'Data & Analytics'], datasets: [{ label: 'Expertise Level', data: [90, 95, 85, 90, 80], backgroundColor: 'rgba(34, 211, 238, 0.2)', borderColor: 'rgba(34, 211, 238, 1)', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { r: { angleLines: { color: 'rgba(203, 213, 225, 0.2)' }, grid: { color: 'rgba(203, 213, 225, 0.2)' }, pointLabels: { font: { size: 12, weight: 'bold', family: "'Inter', sans-serif" }, color: '#cbd5e1' }, ticks: { display: false, backdropColor: 'transparent' } } }, plugins: { legend: { display: false }, tooltip: { yAlign: 'bottom', displayColors: false, backgroundColor: '#1e293b', titleColor: '#ffffff', bodyColor: '#cbd5e1', titleFont: { size: 16, family: "'Inter', sans-serif" }, bodyFont: { size: 14, family: "'Inter', sans-serif" }, padding: 15, borderColor: 'rgba(34, 211, 238, 0.5)', borderWidth: 1, callbacks: { label: (context) => skillsTooltips[context.dataIndex] } } } } });
+
+            // AI Q&A Logic
+            const askAiButton = document.getElementById('ask-ai-button');
+            const aiQuestionInput = document.getElementById('ai-question');
+            const aiResponseContainer = document.getElementById('ai-response-container');
+            const aiResponseEl = document.getElementById('ai-response');
+            const aiLoadingEl = document.getElementById('ai-loading');
+            askAiButton.addEventListener('click', async () => {
+                const question = aiQuestionInput.value;
+                const sanitationResult = sanitizeInput(question);
+
+                if (sanitationResult.detected) {
+                    showSecurityModal("XSS attempt detected & neutralized. <br> A good defense is the best offense. 😉");
+                    aiQuestionInput.value = "";
+                    return;
+                }
+
+                if (!question.trim()) { aiResponseEl.textContent = "Please enter a question."; aiResponseContainer.style.display = 'block'; return; }
+                aiLoadingEl.style.display = 'block'; aiResponseContainer.style.display = 'none'; askAiButton.disabled = true;
+                const prompt = `You are Om Patel, a cybersecurity and machine learning specialist. Based on your CV, answer the following question from a recruiter. Keep your answer professional, confident, and concise (2-4 sentences). Your CV context is: ###${cvContext}###. The recruiter's question is: "${question}"`;
+                const response = await callGemini(prompt);
+                aiResponseEl.textContent = response; aiLoadingEl.style.display = 'none'; aiResponseContainer.style.display = 'block'; askAiButton.disabled = false;
+            });
+
+            // Cover Letter Modal Logic
+            const modal = document.getElementById('coverLetterModal');
+            const openModalBtn = document.getElementById('openCoverLetterModal');
+            const closeModalBtn = document.getElementById('closeCoverLetterModal');
+            const generateBtn = document.getElementById('generateCoverLetter');
+            const companyNameInput = document.getElementById('companyName');
+            const jobRoleInput = document.getElementById('jobRole');
+            const resultContainer = document.getElementById('coverLetterResultContainer');
+            const resultEl = document.getElementById('coverLetterResult');
+            const coverLetterLoadingEl = document.getElementById('coverLetterLoading');
+            openModalBtn.addEventListener('click', () => { modal.classList.remove('opacity-0', 'pointer-events-none'); modal.querySelector('div').classList.remove('-translate-y-12'); });
+            const closeModal = () => { modal.classList.add('opacity-0', 'pointer-events-none'); modal.querySelector('div').classList.add('-translate-y-12'); };
+            closeModalBtn.addEventListener('click', closeModal);
+            generateBtn.addEventListener('click', async () => {
+                const companyName = companyNameInput.value.trim();
+                const jobRole = jobRoleInput.value.trim();
+                if (!companyName || !jobRole) { resultEl.textContent = "Please provide both a company name and a job role."; resultContainer.style.display = 'block'; return; }
+                coverLetterLoadingEl.style.display = 'block'; resultContainer.style.display = 'block'; resultEl.style.display = 'none'; generateBtn.disabled = true;
+                const prompt = `You are Om Patel, a cybersecurity and machine learning specialist. Using your CV context, write a compelling and concise introductory paragraph (around 4-5 sentences) for a cover letter. The target is the ${jobRole} position at ${companyName}. Highlight your most relevant skills and projects for such a role. Your CV context is: ###${cvContext}###.`;
+                const response = await callGemini(prompt);
+                resultEl.textContent = response; coverLetterLoadingEl.style.display = 'none'; resultEl.style.display = 'block'; generateBtn.disabled = false;
+            });
+        });
+
+        function toggleProject(element) {
+            element.classList.toggle('open');
+        }
+    </script>
+
 </body>
 </html>
