@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net/npm/chart.js; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://generativelanguage.googleapis.com; img-src 'self' data:;">
     <title>Om Patel | Cybersecurity & Machine Learning Specialist</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -351,7 +352,7 @@
 
                 if (!question.trim()) { aiResponseEl.textContent = "Please enter a question."; aiResponseContainer.style.display = 'block'; return; }
                 aiLoadingEl.style.display = 'block'; aiResponseContainer.style.display = 'none'; askAiButton.disabled = true;
-                const prompt = `You are Om Patel, a cybersecurity and machine learning specialist. Based on your CV, answer the following question from a recruiter. Keep your answer professional, confident, and concise (2-4 sentences). Your CV context is: ###${cvContext}###. The recruiter's question is: "${question}"`;
+                const prompt = `You are Om Patel, a cybersecurity and machine learning specialist. Based on your CV, answer the following question from a recruiter. Your primary goal is to impress them for a cybersecurity role. Keep your answer professional, confident, and concise (2-4 sentences), always framing it to highlight skills relevant to a top-tier cybersecurity position. Your CV context is: ###${cvContext}###. The recruiter's question is: "${question}"`;
                 const response = await callGemini(prompt);
                 aiResponseEl.textContent = response; aiLoadingEl.style.display = 'none'; aiResponseContainer.style.display = 'block'; askAiButton.disabled = false;
             });
@@ -374,7 +375,7 @@
                 const jobRole = jobRoleInput.value.trim();
                 if (!companyName || !jobRole) { resultEl.textContent = "Please provide both a company name and a job role."; resultContainer.style.display = 'block'; return; }
                 coverLetterLoadingEl.style.display = 'block'; resultContainer.style.display = 'block'; resultEl.style.display = 'none'; generateBtn.disabled = true;
-                const prompt = `You are Om Patel, a cybersecurity and machine learning specialist. Using your CV context, write a compelling and concise introductory paragraph (around 4-5 sentences) for a cover letter. The target is the ${jobRole} position at ${companyName}. Highlight your most relevant skills and projects for such a role. Your CV context is: ###${cvContext}###.`;
+                const prompt = `You are Om Patel, a cybersecurity and machine learning specialist. Using your CV context, write a compelling and concise introductory paragraph (around 4-5 sentences) for a cover letter. The target is the ${jobRole} position at ${companyName}. Emphasize skills and projects that are most relevant to a premier cybersecurity role, such as threat detection, ethical hacking, and secure system design. Your CV context is: ###${cvContext}###.`;
                 const response = await callGemini(prompt);
                 resultEl.textContent = response; coverLetterLoadingEl.style.display = 'none'; resultEl.style.display = 'block'; generateBtn.disabled = false;
             });
