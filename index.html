@@ -25,8 +25,6 @@
         @keyframes background-pan { from { background-position: 0% 0%; } to { background-position: 0% -200%; } }
         @keyframes glitch { 2%, 64% { transform: translate(2px, 0) skew(0deg); } 4%, 60% { transform: translate(-2px, 0) skew(0deg); } 62% { transform: translate(0, 0) skew(5deg); } }
         @keyframes scan-line { 0% { top: 0; opacity: 0; } 10% { opacity: 0.7; } 90% { opacity: 0.7; } 100% { top: 100%; opacity: 0; } }
-        @keyframes typing { from { width: 0; } to { width: 100%; } }
-        @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #22d3ee; } }
 
         body { font-family: 'Inter', sans-serif; background-color: #020617; color: #cbd5e1; overflow-x: hidden; }
         #background-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-image: linear-gradient(rgba(2, 6, 23, 0.95), rgba(2, 6, 23, 0.95)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><defs><filter id="f1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter></defs><circle cx="20" cy="20" r="2" fill="%2306b6d4" filter="url(%23f1)"/><circle cx="80" cy="30" r="1.5" fill="%230e7490"/><circle cx="30" cy="70" r="1" fill="%2322d3ee"/><circle cx="90" cy="80" r="2.5" fill="%2306b6d4" filter="url(%23f1)"/></svg>'); background-size: 200px 200px; animation: background-pan 30s linear infinite; opacity: 0.3; }
@@ -39,7 +37,6 @@
         .modal { transition: opacity 0.25s ease; }
         .glitch-text:hover { animation: glitch 1s linear infinite; }
         .project-card:hover::after { content: ''; position: absolute; left: 0; width: 100%; height: 3px; background: rgba(34, 211, 238, 0.7); box-shadow: 0 0 10px rgba(34, 211, 238, 1); animation: scan-line 2s cubic-bezier(0.23, 1, 0.32, 1) infinite; }
-        #hero-title { overflow: hidden; border-right: .15em solid #22d3ee; white-space: nowrap; margin: 0 auto; letter-spacing: .1em; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
     </style>
 </head>
 <body class="antialiased">
@@ -84,7 +81,7 @@
 
         <!-- Hero Section -->
         <section id="hero" class="text-center mb-20">
-            <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight">Cybersecurity & Machine Learning Specialist</h1>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight">Cybersecurity & Machine Learning Specialist</h1>
             <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto">
                 Building, fortifying, and defending modern digital ecosystems with AI-driven threat detection and secure software engineering.
             </p>
@@ -252,32 +249,32 @@
     <script>
         const cvContext = `Om Patel - Cybersecurity & Machine Learning Specialist. Summary: Results-oriented specialist with a record of developing high-accuracy, AI-driven threat detection systems. Combines ethical hacking, penetration testing, and secure full-stack development. Education: MSc in Cybersecurity and Machine Learning, University of Aberdeen (Expected 2025); BSc in Information and Technology (First Class with Distinction). Certifications: Cybersecurity Levels 1, 2 & 3 from Intellect Computer Institute. Core Skills: Cybersecurity (Ethical Hacking, Penetration Testing, Metasploit, Nmap, Network Security, Threat Analysis, Incident Response, Digital Forensics, Wireshark, Autopsy), Machine Learning for Security (Phishing Detection, Threat Classification, Anomaly Detection, NLP, Deepfake Detection, BERT, LSTM, LightGBM, XGBoost), Secure Software Development (Full-Stack, ASP.NET, Angular, Secure API Design, Database Security). Key Projects: 1. Hybrid AI Phishing Detection Model: MSc Thesis, 98.7% accuracy. 2. AI-Driven Security Threat Detection: Reduced false positives by ~30%. 3. Deepfake Threat Research: Authored report with mitigation strategies. 4. Human Resource Management System: Full-stack HR platform. 5. Predicting Driver Situation Awareness: ML for safe human-AI interaction. 6. Prolog-Based Text Adventure Game: AI knowledge representation. Professional Experience: Freelance Web Developer & Project Lead, Full Stack Developer Intern, Cybersecurity Tutor for senior law enforcement.`;
 
-async function callGemini(prompt) {
-    // This function now calls our secure Netlify function
-    const apiUrl = `/.netlify/functions/gemini`;
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'POST', // This is the crucial line to add/ensure is present
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt })
-        });
+        async function callGemini(prompt) {
+            // This function now calls our secure Netlify function
+            const apiUrl = `/.netlify/functions/gemini`;
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
 
-        if (!response.ok) {
-            throw new Error(`API call to proxy failed with status: ${response.status}`);
-        }
+                if (!response.ok) {
+                    throw new Error(`API call to proxy failed with status: ${response.status}`);
+                }
 
-        const result = await response.json();
-        if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
-            return result.candidates[0].content.parts[0].text;
-        } else if (result.error) {
-            throw new Error(result.error);
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                } else if (result.error) {
+                    throw new Error(result.error);
+                }
+                return "Sorry, I couldn't generate a response.";
+            } catch (error) {
+                console.error("Gemini proxy call error:", error);
+                return "An error occurred while trying to contact the AI assistant.";
+            }
         }
-        return "Sorry, I couldn't generate a response. The model may be unavailable.";
-    } catch (error) {
-        console.error("Gemini proxy call error:", error);
-        return "An error occurred while trying to contact the AI assistant. Please check the console for details.";
-    }
-}
 
         document.addEventListener('DOMContentLoaded', function () {
             // Mobile menu toggle
