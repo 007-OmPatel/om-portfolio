@@ -4,23 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net/npm/chart.js; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' *.netlify.app; img-src 'self' data:;">
-    <title>Om Patel | Cybersecurity & Machine Learning Specialist</title>
+    <title>Om Patel | AI Developer & Cybersecurity Specialist</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Dark Slate & Cyan -->
-    <!-- Application Structure Plan: A single-page application with a top navigation bar for smooth scrolling to thematic sections. This non-linear structure allows recruiters to immediately jump to the content most relevant to them. The flow is designed to first present a high-level summary, then allow a deep-dive into specific areas via interactive elements. Gemini API features are added to provide a conversational layer and demonstrate proactive AI integration. -->
-    <!-- Visualization & Content Choices: 
-        - Skills Table -> Goal: Compare/Organize -> Viz: Interactive Polar Area Chart (Chart.js) -> Interaction: Hover tooltips reveal detailed skills. Justification: Visually represents the multi-faceted nature of his expertise.
-        - Projects List -> Goal: Inform/Engage -> Viz: Grid of interactive cards (HTML/CSS) -> Interaction: Clicking a card toggles visibility. Justification: Encourages engagement and keeps the layout clean.
-        - Experience/Education -> Goal: Show Progression -> Viz: Vertical Timeline (HTML/CSS). Justification: Clear, intuitive representation of his career path.
-        - AI Q&A -> Goal: Engage/Inform -> Viz: Text Input/Output (HTML) -> Interaction: User types question, Gemini API generates answer. Justification: Creates a dynamic, conversational experience for recruiters.
-        - AI Cover Letter -> Goal: Demonstrate/Assist -> Viz: Modal Input (HTML) -> Interaction: User provides role/company, Gemini API generates text. Justification: Showcases proactive use of AI and assists recruiters.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    
     <style>
         @keyframes background-pan { from { background-position: 0% 0%; } to { background-position: 0% -200%; } }
         @keyframes glitch { 2%, 64% { transform: translate(2px, 0) skew(0deg); } 4%, 60% { transform: translate(-2px, 0) skew(0deg); } 62% { transform: translate(0, 0) skew(5deg); } }
@@ -43,7 +34,6 @@
 
     <div id="background-animation"></div>
 
-    <!-- Header & Navigation -->
     <header class="bg-slate-900/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-700/50">
         <nav class="container mx-auto px-6 py-3 flex items-center">
             <a href="#" class="text-2xl font-extrabold text-white hover:text-cyan-400 transition-colors glitch-text mr-auto">
@@ -58,14 +48,12 @@
                 <a href="#ai-chat" class="bg-cyan-400/10 text-cyan-300 px-5 py-2 rounded-full text-sm font-semibold hover:bg-cyan-400/20 transition-colors">✨ AI Q&A</a>
                 <a href="mailto:007omp@gmail.com" class="bg-cyan-500 text-slate-900 px-5 py-2 rounded-md text-sm font-bold hover:bg-cyan-400 transition-colors">Contact Me</a>
             </div>
-            <!-- Mobile Menu Button -->
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-slate-300 hover:text-white focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </nav>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden">
             <a href="#overview" class="block py-2 px-6 text-slate-300 hover:bg-slate-800">Overview</a>
             <a href="#skills" class="block py-2 px-6 text-slate-300 hover:bg-slate-800">Skills</a>
@@ -79,11 +67,10 @@
 
     <main class="container mx-auto px-6 py-12 md:py-20">
 
-        <!-- Hero Section -->
         <section id="hero" class="text-center mb-20">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight">Cybersecurity & Machine Learning Specialist</h1>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight">AI Developer & Cybersecurity Specialist</h1>
             <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto">
-                Building, fortifying, and defending modern digital ecosystems with AI-driven threat detection and secure software engineering.
+                Developing predictive market intelligence and fortifying digital ecosystems with AI-driven threat detection and secure software engineering.
             </p>
              <div class="mt-8 flex justify-center space-x-4">
                 <a href="https://github.com/007-OmPatel" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors">
@@ -92,12 +79,11 @@
             </div>
         </section>
 
-        <!-- Overview Section -->
         <section id="overview" class="mb-20">
             <h2 class="text-3xl font-bold text-center text-white mb-12">Overview</h2>
             <div class="max-w-4xl mx-auto bg-slate-800/50 p-8 rounded-xl border border-slate-700 backdrop-blur-sm">
                 <p class="text-lg text-slate-300 leading-relaxed mb-6">
-                    Results-oriented Cybersecurity and Machine Learning specialist with a proven record of developing high-accuracy, AI-driven threat detection systems. I combine hands-on ethical hacking and penetration testing skills with a strong foundation in secure full-stack development to build, fortify, and defend modern digital ecosystems. I am passionate about translating complex security challenges into actionable, data-driven solutions that deliver measurable improvements in security posture.
+                    Results-oriented AI Developer and Cybersecurity specialist. Currently driving financial innovation at Arkalogi Tech by creating proprietary AI tools for predictive market intelligence. I combine deep learning expertise with a strong foundation in ethical hacking and secure software development to build adaptive, resilient systems. Passionate about translating complex data into actionable, probability-based signals and defending digital ecosystems from sophisticated threats.
                 </p>
                 <div class="text-center">
                     <button id="openCoverLetterModal" class="bg-cyan-500 text-slate-900 font-bold py-3 px-6 rounded-lg hover:bg-cyan-400 transition-colors duration-300">
@@ -107,16 +93,14 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
         <section id="skills" class="mb-20">
             <h2 class="text-3xl font-bold text-center text-white mb-4">Core Expertise</h2>
-            <p class="text-center text-slate-400 mb-12 max-w-2xl mx-auto">This chart visualizes my key areas of expertise. Hover over a segment to see the specific skills within each domain, showcasing the synergy between Cybersecurity, Machine Learning, and Secure Development.</p>
+            <p class="text-center text-slate-400 mb-12 max-w-2xl mx-auto">This chart visualizes my key areas of expertise. Hover over a segment to see the specific skills within each domain, showcasing the synergy between Financial AI, Cybersecurity, and Secure Development.</p>
             <div class="chart-container">
                 <canvas id="skillsChart"></canvas>
             </div>
         </section>
 
-        <!-- Projects Section -->
         <section id="projects" class="mb-20">
             <h2 class="text-3xl font-bold text-center text-white mb-4">Key Projects</h2>
             <p class="text-center text-slate-400 mb-12 max-w-2xl mx-auto">A selection of projects demonstrating my ability to apply theoretical knowledge to solve real-world problems. Click on any project to see more details about the implementation and its impact.</p>
@@ -197,21 +181,57 @@
             </div>
         </section>
         
-        <!-- Experience & Education Section -->
         <section id="experience" class="mb-20">
-            <h2 class="text-3xl font-bold text-center text-white mb-12">Career & Education Timeline</h2>
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Professional Experience & Education</h2>
             <div class="max-w-3xl mx-auto">
                 <div class="relative border-l-2 border-slate-700 ml-12 pl-12 pb-4">
-                    <div class="timeline-item mb-12"><h3 class="text-xl font-bold text-white">MSc in Cybersecurity and Machine Learning</h3><p class="text-md font-medium text-slate-400">University of Aberdeen, UK</p><p class="text-sm text-slate-500 font-mono">Sep 2024 – Sep 2025 (Expected)</p></div>
-                    <div class="timeline-item mb-12"><h3 class="text-xl font-bold text-white">Freelance Web Developer & Project Lead</h3><p class="text-md font-medium text-slate-400">Kairo | Surat, India</p><p class="text-sm text-slate-500 font-mono">Jul 2024 – Present</p></div>
-                    <div class="timeline-item mb-12"><h3 class="text-xl font-bold text-white">Full Stack Developer Intern</h3><p class="text-md font-medium text-slate-400">Elite Technocrats | Surat, India</p><p class="text-sm text-slate-500 font-mono">Jan 2024 – May 2024</p></div>
-                    <div class="timeline-item mb-12"><h3 class="text-xl font-bold text-white">Cybersecurity Tutor</h3><p class="text-md font-medium text-slate-400">Private Tutoring for Deputy Commissioner of Police</p><p class="text-sm text-slate-500 font-mono">Dec 2023 – May 2024</p></div>
-                    <div class="timeline-item"><h3 class="text-xl font-bold text-white">BSc in Information and Technology</h3><p class="text-md font-medium text-slate-400">Sarvajanik University, India | First Class with Distinction</p><p class="text-sm text-slate-500 font-mono">2021 – 2024</p></div>
+                    
+                    <div class="timeline-item mb-12">
+                        <h3 class="text-xl font-bold text-white">AI Developer</h3>
+                        <p class="text-md font-medium text-cyan-400">Arkalogi Tech | Surat, India</p>
+                        <p class="text-sm text-slate-500 font-mono">09/2025 – Present</p>
+                        <p class="text-slate-400 mt-2 text-sm leading-relaxed">
+                            Spearhead the creation of proprietary AI tools that provide predictive market intelligence for trading operations. I build adaptive systems that synthesize technical and fundamental data to emit reliable trading signals. These solutions enhance decision-making capabilities, allowing the firm to anticipate market trends and execute trades based on data-driven probability assessments.
+                        </p>
+                    </div>
+
+                    <div class="timeline-item mb-12">
+                        <h3 class="text-xl font-bold text-white">Freelance Web Developer & Project Lead</h3>
+                        <p class="text-md font-medium text-slate-400">Kairo | Surat, India</p>
+                        <p class="text-sm text-slate-500 font-mono">07/2024 – 08/2025</p>
+                        <p class="text-slate-400 mt-2 text-sm leading-relaxed">
+                            Led the development of a custom e-commerce platform for a new startup brand, building a robust front-end and back-end structure. After laying the technical foundation, recruited and onboarded two developers to continue feature development. Currently overseeing the project as a technical supervisor to ensure scalability, performance, and timely delivery.
+                        </p>
+                    </div>
+
+                    <div class="timeline-item mb-12">
+                        <h3 class="text-xl font-bold text-white">MSc in Cybersecurity and Machine Learning</h3>
+                        <p class="text-md font-medium text-slate-400">University of Aberdeen, UK</p>
+                        <p class="text-sm text-slate-500 font-mono">Sep 2024 – Sep 2025 (Expected)</p>
+                    </div>
+
+                    <div class="timeline-item mb-12">
+                        <h3 class="text-xl font-bold text-white">Full Stack Developer Intern</h3>
+                        <p class="text-md font-medium text-slate-400">Elite Technocrats | Surat, India</p>
+                        <p class="text-sm text-slate-500 font-mono">Jan 2024 – May 2024</p>
+                    </div>
+
+                    <div class="timeline-item mb-12">
+                        <h3 class="text-xl font-bold text-white">Cybersecurity Tutor</h3>
+                        <p class="text-md font-medium text-slate-400">Private Tutoring for Deputy Commissioner of Police</p>
+                        <p class="text-sm text-slate-500 font-mono">Dec 2023 – May 2024</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-bold text-white">BSc in Information and Technology</h3>
+                        <p class="text-md font-medium text-slate-400">Sarvajanik University, India | First Class with Distinction</p>
+                        <p class="text-sm text-slate-500 font-mono">2021 – 2024</p>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- Certifications Section -->
         <section id="certifications" class="mb-20">
             <h2 class="text-3xl font-bold text-center text-white mb-12">Certifications</h2>
             <div class="max-w-2xl mx-auto bg-slate-800/50 p-8 rounded-xl text-center border border-slate-700 backdrop-blur-sm">
@@ -221,13 +241,12 @@
             </div>
         </section>
 
-        <!-- AI Chat Section -->
         <section id="ai-chat" class="mb-20">
             <div class="max-w-4xl mx-auto bg-slate-800/50 p-8 rounded-xl border border-slate-700 backdrop-blur-sm">
                 <h2 class="text-3xl font-bold text-center text-white mb-4">✨ Ask Me Anything</h2>
                 <p class="text-center text-slate-400 mb-8 max-w-2xl mx-auto">Have a question about my experience, a specific project, or how my skills can benefit your team? Ask my AI assistant below. It's powered by Google's Gemini API and has been trained on my CV.</p>
                 <div class="space-y-4">
-                    <textarea id="ai-question" class="w-full p-4 bg-slate-900 border border-slate-600 rounded-lg text-slate-300 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition" rows="3" placeholder="e.g., Tell me more about your experience with penetration testing tools."></textarea>
+                    <textarea id="ai-question" class="w-full p-4 bg-slate-900 border border-slate-600 rounded-lg text-slate-300 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition" rows="3" placeholder="e.g., Tell me about your work with predictive market signals."></textarea>
                     <button id="ask-ai-button" class="w-full bg-cyan-500 text-slate-900 font-bold py-3 px-6 rounded-lg hover:bg-cyan-400 transition-colors duration-300 flex items-center justify-center">Ask AI Assistant</button>
                     <div id="ai-response-container" class="mt-6 p-6 bg-slate-900 rounded-lg border border-slate-700" style="display: none;"><p id="ai-response" class="text-slate-300 whitespace-pre-wrap"></p></div>
                     <div id="ai-loading" class="text-center py-4" style="display: none;"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400 mx-auto"></div><p class="mt-2 text-slate-400">Thinking...</p></div>
@@ -237,20 +256,44 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="bg-slate-900/50 border-t border-slate-800 mt-20">
         <div class="container mx-auto px-6 py-8 text-center"><h3 class="text-2xl font-bold text-white mb-2">Let's Connect</h3><p class="mb-4 text-slate-400">Open to new opportunities and collaborations.</p><a href="mailto:007omp@gmail.com" class="bg-cyan-500 text-slate-900 px-6 py-3 rounded-lg hover:bg-cyan-400 transition-colors duration-300 inline-block font-bold">007omp@gmail.com</a><div class="mt-8 border-t border-slate-800 pt-6"><p class="text-slate-500">&copy; 2025 Om Patel. All Rights Reserved.</p></div></div>
     </footer>
 
-    <!-- Modals -->
     <div id="coverLetterModal" class="modal fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none"><div class="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl p-8 w-full max-w-lg transform -translate-y-12 transition-transform duration-300"><h3 class="text-2xl font-bold text-white mb-4">✨ AI Cover Letter Assistant</h3><p class="text-slate-400 mb-6">Provide a company name and job role to generate a tailored cover letter introduction.</p><div class="space-y-4"><input type="text" id="companyName" placeholder="Company Name (e.g., Google)" class="w-full p-3 bg-slate-900 border border-slate-600 rounded-lg text-slate-300 focus:ring-cyan-500"><input type="text" id="jobRole" placeholder="Job Role (e.g., Security Engineer)" class="w-full p-3 bg-slate-900 border border-slate-600 rounded-lg text-slate-300 focus:ring-cyan-500"><button id="generateCoverLetter" class="w-full bg-cyan-500 text-slate-900 font-bold py-3 rounded-lg hover:bg-cyan-400 transition-colors">Generate Intro</button><button id="closeCoverLetterModal" class="w-full bg-slate-700 text-slate-300 font-bold py-3 rounded-lg hover:bg-slate-600 transition-colors">Cancel</button></div><div id="coverLetterResultContainer" class="mt-6" style="display: none;"><div id="coverLetterLoading" class="text-center py-4" style="display: none;"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400 mx-auto"></div><p class="mt-2 text-slate-400">Generating...</p></div><div id="coverLetterResult" class="p-4 bg-slate-900/50 border border-slate-700 rounded-lg text-slate-300"></div></div></div></div>
     <div id="securityModal" class="modal fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none"><div class="bg-slate-800 border border-cyan-500 rounded-xl shadow-2xl p-8 w-full max-w-md text-center transform -translate-y-12 transition-transform duration-300"><p id="securityModalText" class="text-2xl font-mono text-white"></p><button id="closeSecurityModal" class="mt-6 bg-cyan-500 text-slate-900 font-bold py-2 px-6 rounded-lg hover:bg-cyan-400 transition-colors">Got it</button></div></div>
 
     <script>
-        const cvContext = `Om Patel - Cybersecurity & Machine Learning Specialist. Summary: Results-oriented specialist with a record of developing high-accuracy, AI-driven threat detection systems. Combines ethical hacking, penetration testing, and secure full-stack development. Education: MSc in Cybersecurity and Machine Learning, University of Aberdeen (Expected 2025); BSc in Information and Technology (First Class with Distinction). Certifications: Cybersecurity Levels 1, 2 & 3 from Intellect Computer Institute. Core Skills: Cybersecurity (Ethical Hacking, Penetration Testing, Metasploit, Nmap, Network Security, Threat Analysis, Incident Response, Digital Forensics, Wireshark, Autopsy), Machine Learning for Security (Phishing Detection, Threat Classification, Anomaly Detection, NLP, Deepfake Detection, BERT, LSTM, LightGBM, XGBoost), Secure Software Development (Full-Stack, ASP.NET, Angular, Secure API Design, Database Security). Key Projects: 1. Hybrid AI Phishing Detection Model: MSc Thesis, 98.7% accuracy. 2. AI-Driven Security Threat Detection: Reduced false positives by ~30%. 3. Deepfake Threat Research: Authored report with mitigation strategies. 4. Human Resource Management System: Full-stack HR platform. 5. Predicting Driver Situation Awareness: ML for safe human-AI interaction. 6. Prolog-Based Text Adventure Game: AI knowledge representation. Professional Experience: Freelance Web Developer & Project Lead, Full Stack Developer Intern, Cybersecurity Tutor for senior law enforcement.`;
+        // UPDATED CV Context with new Arkalogi Role
+        const cvContext = `Om Patel - AI Developer & Cybersecurity Specialist. 
+        
+        CURRENT ROLE (09/2025 - Present): AI Developer at Arkalogi Tech. 
+        - Responsibilities: Spearhead the creation of proprietary AI tools for predictive market intelligence. Build adaptive systems synthesizing technical and fundamental data to emit reliable trading signals. Enhance decision-making capabilities for the firm to anticipate market trends and execute trades based on data-driven probability assessments.
+
+        PREVIOUS EXPERIENCE:
+        - Freelance Web Developer & Project Lead at Kairo (07/2024 – 08/2025): Led development of a custom e-commerce platform. Recruited and onboarded two developers. Currently technical supervisor for scalability and performance.
+        - Full Stack Developer Intern at Elite Technocrats (Jan 2024 – May 2024).
+        - Cybersecurity Tutor for Deputy Commissioner of Police (Dec 2023 – May 2024).
+        
+        EDUCATION: 
+        - MSc in Cybersecurity and Machine Learning, University of Aberdeen (Sep 2024 – Sep 2025 Expected).
+        - BSc in Information and Technology (First Class with Distinction).
+        
+        CORE SKILLS: 
+        - Cybersecurity: Ethical Hacking, Penetration Testing, Metasploit, Nmap, Network Security, Threat Analysis.
+        - Machine Learning: Financial AI (Predictive Signals, Adaptive Systems), Phishing Detection, NLP, Deepfake Detection, BERT, LSTM, LightGBM, XGBoost.
+        - Development: Full-Stack, ASP.NET, Angular, Secure API Design, Database Security.
+        
+        PROJECTS: 
+        - Hybrid AI Phishing Detection Model (98.7% accuracy).
+        - AI-Driven Security Threat Detection.
+        - Deepfake Threat Research.
+        - Human Resource Management System.
+        - Predicting Driver Situation Awareness.
+        - Prolog-Based Text Adventure Game.
+        `;
 
         async function callGemini(prompt) {
-            // This function now calls our secure Netlify function
             const apiUrl = `/.netlify/functions/gemini`;
             try {
                 const response = await fetch(apiUrl, {
@@ -324,8 +367,8 @@
 
             // Skills Chart
             const ctx = document.getElementById('skillsChart').getContext('2d');
-            const skillsTooltips = [['Ethical Hacking', 'Penetration Testing', 'Network Security', 'Threat Analysis', 'Incident Response', 'Digital Forensics'], ['Phishing Detection', 'Threat Classification', 'Anomaly Detection', 'NLP', 'Deepfake Detection', 'BERT, LSTM, LightGBM'], ['Full-Stack (ASP.NET, Angular)', 'Secure API Design', 'Database Security', 'Secure SDLC', 'AuthN & AuthZ'], ['Metasploit', 'Nmap', 'Wireshark', 'Autopsy', 'Kali Linux'], ['Python', 'TensorFlow', 'Scikit-learn', 'SQL', 'Data Preprocessing']];
-            new Chart(ctx, { type: 'polarArea', data: { labels: ['Cybersecurity & Threat Intelligence', 'Machine Learning for Security', 'Secure Software Development', 'Ethical Hacking & Pen Testing', 'Data & Analytics'], datasets: [{ label: 'Expertise Level', data: [90, 95, 85, 90, 80], backgroundColor: 'rgba(34, 211, 238, 0.2)', borderColor: 'rgba(34, 211, 238, 1)', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { r: { angleLines: { color: 'rgba(203, 213, 225, 0.2)' }, grid: { color: 'rgba(203, 213, 225, 0.2)' }, pointLabels: { font: { size: 12, weight: 'bold', family: "'Inter', sans-serif" }, color: '#cbd5e1' }, ticks: { display: false, backdropColor: 'transparent' } } }, plugins: { legend: { display: false }, tooltip: { yAlign: 'bottom', displayColors: false, backgroundColor: '#1e293b', titleColor: '#ffffff', bodyColor: '#cbd5e1', titleFont: { size: 16, family: "'Inter', sans-serif" }, bodyFont: { size: 14, family: "'Inter', sans-serif" }, padding: 15, borderColor: 'rgba(34, 211, 238, 0.5)', borderWidth: 1, callbacks: { label: (context) => skillsTooltips[context.dataIndex] } } } } });
+            const skillsTooltips = [['Ethical Hacking', 'Penetration Testing', 'Network Security', 'Threat Analysis', 'Incident Response', 'Digital Forensics'], ['Phishing Detection', 'Predictive Market AI', 'Anomaly Detection', 'NLP', 'Deepfake Detection', 'BERT, LSTM, LightGBM'], ['Full-Stack (ASP.NET, Angular)', 'Secure API Design', 'Database Security', 'Secure SDLC', 'AuthN & AuthZ'], ['Metasploit', 'Nmap', 'Wireshark', 'Autopsy', 'Kali Linux'], ['Python', 'TensorFlow', 'Scikit-learn', 'SQL', 'Data Preprocessing']];
+            new Chart(ctx, { type: 'polarArea', data: { labels: ['Cybersecurity & Threat Intelligence', 'Machine Learning (Financial & Security)', 'Secure Software Development', 'Ethical Hacking & Pen Testing', 'Data & Analytics'], datasets: [{ label: 'Expertise Level', data: [90, 95, 85, 90, 80], backgroundColor: 'rgba(34, 211, 238, 0.2)', borderColor: 'rgba(34, 211, 238, 1)', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { r: { angleLines: { color: 'rgba(203, 213, 225, 0.2)' }, grid: { color: 'rgba(203, 213, 225, 0.2)' }, pointLabels: { font: { size: 12, weight: 'bold', family: "'Inter', sans-serif" }, color: '#cbd5e1' }, ticks: { display: false, backdropColor: 'transparent' } } }, plugins: { legend: { display: false }, tooltip: { yAlign: 'bottom', displayColors: false, backgroundColor: '#1e293b', titleColor: '#ffffff', bodyColor: '#cbd5e1', titleFont: { size: 16, family: "'Inter', sans-serif" }, bodyFont: { size: 14, family: "'Inter', sans-serif" }, padding: 15, borderColor: 'rgba(34, 211, 238, 0.5)', borderWidth: 1, callbacks: { label: (context) => skillsTooltips[context.dataIndex] } } } } });
 
             // AI Q&A Logic
             const askAiButton = document.getElementById('ask-ai-button');
@@ -345,7 +388,7 @@
 
                 if (!question.trim()) { aiResponseEl.textContent = "Please enter a question."; aiResponseContainer.style.display = 'block'; return; }
                 aiLoadingEl.style.display = 'block'; aiResponseContainer.style.display = 'none'; askAiButton.disabled = true;
-                const prompt = `You are Om Patel, a cybersecurity and machine learning specialist. Based on your CV, answer the following question from a recruiter. Your primary goal is to impress them for a cybersecurity role. Keep your answer professional, confident, and concise (2-4 sentences), always framing it to highlight skills relevant to a top-tier cybersecurity position. Your CV context is: ###${cvContext}###. The recruiter's question is: "${question}"`;
+                const prompt = `You are Om Patel, an AI Developer and Cybersecurity Specialist. Based on your CV, answer the following question from a recruiter. Your primary goal is to impress them for roles in Financial AI or Cybersecurity. Keep your answer professional, confident, and concise (2-4 sentences). Your CV context is: ###${cvContext}###. The recruiter's question is: "${question}"`;
                 const response = await callGemini(prompt);
                 aiResponseEl.textContent = response; aiLoadingEl.style.display = 'none'; aiResponseContainer.style.display = 'block'; askAiButton.disabled = false;
             });
@@ -368,7 +411,7 @@
                 const jobRole = jobRoleInput.value.trim();
                 if (!companyName || !jobRole) { resultEl.textContent = "Please provide both a company name and a job role."; resultContainer.style.display = 'block'; return; }
                 coverLetterLoadingEl.style.display = 'block'; resultContainer.style.display = 'block'; resultEl.style.display = 'none'; generateBtn.disabled = true;
-                const prompt = `You are Om Patel, a cybersecurity and machine learning specialist. Using your CV context, write a compelling and concise introductory paragraph (around 4-5 sentences) for a cover letter. The target is the ${jobRole} position at ${companyName}. Emphasize skills and projects that are most relevant to a premier cybersecurity role, such as threat detection, ethical hacking, and secure system design. Your CV context is: ###${cvContext}###.`;
+                const prompt = `You are Om Patel, an AI Developer and Cybersecurity Specialist. Using your CV context, write a compelling and concise introductory paragraph (around 4-5 sentences) for a cover letter. The target is the ${jobRole} position at ${companyName}. Emphasize your current work in AI-driven market intelligence at Arkalogi Tech and your cybersecurity background. Your CV context is: ###${cvContext}###.`;
                 const response = await callGemini(prompt);
                 resultEl.textContent = response; coverLetterLoadingEl.style.display = 'none'; resultEl.style.display = 'block'; generateBtn.disabled = false;
             });
